@@ -1,0 +1,134 @@
+        
+        
+        html, body {
+            height: auto;
+            overflow: auto;
+        }
+
+        nav {
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            max-width: 90vw;
+            
+        }
+
+        .menu-btn {
+            flex: 1 1 180px;
+            min-width: 150px;
+            margin: 8px 0;
+            text-align: center;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('../Img/fondosestilos/productosregionalesmenuprincipal.png') no-repeat center center/cover;
+            filter: blur(5px) brightness(0.7);
+            z-index: 1;
+        }
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 2;
+        }
+        .container {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            
+        }
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 20px #000, 0 1px 0 #fff;
+            background: linear-gradient(90deg, #ffb347, #ffcc33, #ff7e5f, #feb47b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        nav {
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            display:autoflex;
+            gap: 30px;
+            
+            
+        }
+        .menu-btn {
+            background: linear-gradient(90deg, #ffb347, #ffcc33);
+            color: #333;
+            border: none;
+            border-radius: 12px;
+            padding: 18px 36px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .menu-btn:hover {
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            color: #fff;
+            transform: scale(1.08);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            nav { flex-direction: column; gap: 18px; padding: 20px 10px; }
+            .menu-btn { padding: 12px 18px; font-size: 1rem; }
+        }
+
+        .social-contacts{
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .social-contacts img {
+            width: 50px;
+            height: 50px;
+            
+        }
+
+        .social-contacts img:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+            width: 50px;
+            height: 50px;   
+        }
+        /* Centrar y fijar debajo del botón "Ver todos los productos" */
+        .social-contacts {
+            position: static;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 0 0 0;
+            margin-top: 10px;
+            z-index: 1000;
+        }
+
+
+
+

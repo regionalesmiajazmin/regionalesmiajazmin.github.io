@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo...</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: #746f6f;
+            background-image: url('./Img/Captura\ de\ pantalla\ 2025-05-27\ 210520.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(0px);
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: inherit;
+            background-size: cover;
+            background-position: center;
+            filter: blur(12px) brightness(0.7);
+            z-index: -1;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            width: 180px;
+            height: 180px;
+            background: #746f6f;
+            border-radius: 50%;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.4s, box-shadow 0.4s;
+            cursor: pointer;
+        }
+        .logo:hover {
+            transform: scale(1.08) ;
+            box-shadow: 0 8px 32px rgba(0,123,255,0.18);
+        }
+        .logo img {
+            width: 420%;
+            height: 420px;
+            object-fit: contain;
+        }
+        .mensaje {
+            margin-top: 24px;
+            font-size: 2.0rem;
+            color: #f5eede;
+            font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+        }
+        
+    </style>
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = './indexs/indexprincipal.html';
+            }, 4000);
+        };
+    </script>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo" title="Ir al Menu Principal">
+            <!-- Reemplaza 'logo.png' por la ruta de tu logo -->
+            <img src="./Img/Imagen de WhatsApp 2025-05-26 a las 02.52.46_fa50a5fb.jpg" alt="Logo">
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="mensaje">
+            Redirigiendo al menú principal...
+        </div>
+        </div>
+    </div>
+</body>
+</html>
