@@ -155,10 +155,90 @@
             <p>Producto 100% de la Rioja.</p>
         </div>  
     </div>
-    <a href="../indexs/indexprincipal.html" class="boton-flotante" title="Volver a inicio">&#8592; Volver</a>
+    <a href="../indexs/indexprincipal.html" class="boton-flotante" title="Volver a inicio">Volver</a>
 
    
+    <script>
+    // Crear un array para almacenar los productos seleccionados
+    let carrito = [];
 
+    // Permitir seleccionar productos haciendo clic en la imagen
+    document.querySelectorAll('.producto').forEach((producto, idx) => {
+        // Crear checkbox oculto
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'producto-' + idx;
+        checkbox.style.display = 'none';
+
+        // Insertar checkbox al principio del div producto
+        producto.insertBefore(checkbox, producto.firstChild);
+
+        // Añadir clase para resaltar selección
+        producto.style.cursor = 'pointer';
+
+        // Manejar selección al hacer clic en la imagen
+        const img = producto.querySelector('img');
+        img.style.outline = '2px solid transparent';
+        img.style.transition = 'outline 0.2s';
+
+        function updateSelection() {
+            const nombre = producto.querySelector('h2').textContent.trim();
+            if (checkbox.checked) {
+                img.style.outline = '2px solid #ff0000';
+                if (!carrito.includes(nombre)) carrito.push(nombre);
+            } else {
+                img.style.outline = '2px solid transparent';
+                carrito = carrito.filter(item => item !== nombre);
+            }
+        }
+
+        img.addEventListener('click', function() {
+            checkbox.checked = !checkbox.checked;
+            updateSelection();
+        });
+
+        // Por accesibilidad, permitir seleccionar con el checkbox también
+        checkbox.addEventListener('change', updateSelection);
+    });
+
+    // Crear botón para enviar por WhatsApp
+    const botonEnviar = document.createElement('button');
+    botonEnviar.textContent = 'Enviar lista por WhatsApp';
+    botonEnviar.style.position = 'fixed';
+    botonEnviar.style.bottom = '80px';
+    botonEnviar.style.right = '30px';
+    botonEnviar.style.padding = '12px 20px';
+    botonEnviar.style.background = '#25D366';
+    botonEnviar.style.color = '#fff';
+    botonEnviar.style.border = 'none';
+    botonEnviar.style.borderRadius = '25px';
+    botonEnviar.style.cursor = 'pointer';
+    botonEnviar.style.zIndex = '1000';
+
+    // Cambiar color al pasar el mouse por encima
+    botonEnviar.addEventListener('mouseenter', function() {
+        botonEnviar.style.background = '#388e3c';
+    });
+    botonEnviar.addEventListener('mouseleave', function() {
+        botonEnviar.style.background = '#25D366';
+    });
+        
+
+    botonEnviar.onclick = function() {
+        if (carrito.length === 0) {
+            alert('Selecciona al menos un producto por favor.');
+            return;
+        }
+        const mensaje = encodeURIComponent(
+            'Hola! Quiero encargar los siguientes productos:\n- ' + carrito.map(nombre => `${nombre} , Cantidad: `).join('\n- ')
+        );
+        // Cambia el número por el del dueño (formato internacional, sin + ni 0 inicial)
+        const telefono = '5493804793100';
+        window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
+    };
+
+    document.body.appendChild(botonEnviar);
+    </script>
 
 
 

@@ -1,17 +1,17 @@
 .boton-flotante {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 22px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-size: 18px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transition: background 0.3s;
-        z-index: 1000;
-    }
-    .boton-flotante:hover {
-        background-color: #388e3c;
-    }
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    padding: 12px 20px;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    z-index: 1000;
+    text-decoration: none; /* Quita el subrayado */
+}
+.boton-flotante:hover {
+    background-color: #388e3c;
+    text-decoration: none; /* Asegura que tampoco haya subrayado al pasar el mouse */
+}
