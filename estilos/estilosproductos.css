@@ -89,14 +89,17 @@ body {
 /* Imagen del producto */
 .producto img {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 4 / 3;
+    height: auto;
     object-fit: cover;
-    transition: transform 0.5s ease;
-    border-bottom: 3px solid #f0f0f0;
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: block;
 }
 
 .producto:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 /* Contenido de la tarjeta */
