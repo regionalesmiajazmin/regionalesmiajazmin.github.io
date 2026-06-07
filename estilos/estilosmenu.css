@@ -172,10 +172,12 @@ h2 {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.15);
     padding: 10px 20px;
     border-radius: 30px;
     font-size: 0.95rem;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .prop-icon {
@@ -311,7 +313,6 @@ h2 {
     padding: 15px 35px !important;
     border-radius: 50px !important;
     position: relative;
-    overflow: hidden;
     animation: pulse 2s infinite;
 }
 
@@ -326,14 +327,16 @@ h2 {
 
 .btn-badge {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -12px;
+    right: -5px;
     background: #ff4757;
     color: white;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.85rem;
+    font-weight: 800;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.4);
     animation: bounce 1s infinite;
 }
 
