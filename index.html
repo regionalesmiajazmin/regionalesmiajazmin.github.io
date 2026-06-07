@@ -3,92 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Regionales Mia Jazmin: productos regionales de alta calidad como quesos artesanales, miel pura, aceite de oliva y vinos selectos. Descubre lo mejor de nuestra región.">
-    <meta name="keywords" content="productos regionales, quesos artesanales, miel pura, aceite de oliva, vinos, emprendimiento familiar, productores locales, dulces, frutos secos, alfajores, aceitunas, salames, arropes, nueces confitadas, patay, dulces en almíbar">
+    <meta name="description" content="Regionales Mia Jazmin: productos regionales artesanales de La Rioja. Quesos, mieles, vinos, aceitunas y más. Envíos a todo el país.">
+    <meta name="keywords" content="productos regionales, quesos artesanales, miel pura, aceite de oliva, vinos, emprendimiento familiar, La Rioja">
     <meta name="author" content="Regionales Mia Jazmin">
-   
-    <title>Redirigiendo...</title>
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Regionales Mia Jazmin - Productos Artesanales de La Rioja">
+    <meta property="og:description" content="Descubre lo mejor de nuestra región: quesos, mieles, vinos y más productos artesanales.">
+    <meta property="og:type" content="website">
+    <title>Regionales Mia Jazmin | Productos Artesanales de La Rioja</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             display: flex;
             height: 100vh;
             justify-content: center;
             align-items: center;
-            background: #746f6f;
-            background-image: url('./Img/Captura\ de\ pantalla\ 2025-05-27\ 210520.png');
-            background-size: cover;
-            background-position: center;
-            filter: blur(0px);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            position: relative;
         }
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: inherit;
-            background-size: cover;
-            background-position: center;
-            filter: blur(12px) brightness(0.7);
-            z-index: -1;
+
+        /* Partículas animadas de fondo */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
         }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 183, 71, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
         .logo-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
         }
-        .logo {
-            width: 180px;
-            height: 180px;
-            background: #746f6f;
+
+        .logo-wrapper {
+            position: relative;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            background: linear-gradient(45deg, #ffb347, #ffcc33, #ff7e5f);
+            padding: 5px;
+            box-shadow: 0 20px 60px rgba(255, 183, 71, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 20px 60px rgba(255, 183, 71, 0.4); }
+            50% { box-shadow: 0 30px 80px rgba(255, 183, 71, 0.6); }
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.4s, box-shadow 0.4s;
-            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.4s;
         }
+
         .logo:hover {
-            transform: scale(1.08) ;
-            box-shadow: 0 8px 32px rgba(0,123,255,0.18);
+            transform: scale(1.05);
         }
+
         .logo img {
-            width: 420%;
-            height: 420px;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
+
+        .brand-name {
+            margin-top: 30px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ffb347, #ffcc33, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(255, 183, 71, 0.3);
+        }
+
+        .tagline {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .loader {
+            margin-top: 40px;
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffb347, #ffcc33);
+            width: 0%;
+            animation: loading 3s ease-in-out forwards;
+            box-shadow: 0 0 10px rgba(255, 183, 71, 0.5);
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
         .mensaje {
-            margin-top: 24px;
-            font-size: 2.0rem;
-            color: #f5eede;
-            font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            animation: blink 1.5s infinite;
         }
-        
+
+        @keyframes blink {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Skip button para accesibilidad */
+        .skip-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .skip-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        @media (max-width: 600px) {
+            .logo-wrapper { width: 160px; height: 160px; }
+            .brand-name { font-size: 1.8rem; }
+            .tagline { font-size: 1rem; }
+        }
     </style>
     <script>
+        // Redirección con seguridad
         window.onload = function() {
+            // Crear partículas dinámicas
+            const particlesContainer = document.createElement('div');
+            particlesContainer.className = 'particles';
+            for(let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+            document.body.appendChild(particlesContainer);
+
+            // Redirección segura
             setTimeout(function() {
                 window.location.href = './indexs/indexprincipal.html';
-            }, 4000);
+            }, 3000);
         };
+
+        // Prevenir clicks accidentales durante carga
+        document.addEventListener('click', function(e) {
+            if(!e.target.closest('.skip-link')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </head>
 <body>
+    <a href="./indexs/indexprincipal.html" class="skip-link">Saltar intro →</a>
+    
     <div class="logo-container">
-        <div class="logo" title="Ir al Menu Principal">
-            <!-- Reemplaza 'logo.png' por la ruta de tu logo -->
-            <img src="./Img/Imagen de WhatsApp 2025-05-26 a las 02.52.46_fa50a5fb.jpg" alt="Logo">
+        <div class="logo-wrapper">
+            <div class="logo" title="Regionales Mia Jazmin">
+                <img src="./Img/Imagen de WhatsApp 2025-05-26 a las 02.52.46_fa50a5fb.jpg" alt="Logo Regionales Mia Jazmin">
+            </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="mensaje">
-            Redirigiendo al menú principal...
+        <h1 class="brand-name">REGIONALES MIA JAZMIN</h1>
+        <p class="tagline">"El sabor auténtico de La Rioja"</p>
+        
+        <div class="loader">
+            <div class="loader-bar"></div>
         </div>
-        </div>
+        <p class="mensaje">Preparando experiencia gastronómica...</p>
     </div>
 </body>
 </html>
