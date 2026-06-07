@@ -1,17 +1,63 @@
 .boton-flotante {
     position: fixed;
-    bottom: 20px;
-    right: 30px;
-    padding: 12px 20px;
-    background: #25D366;
+    bottom: 30px;
+    left: 30px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
     cursor: pointer;
-    z-index: 1000;
-    text-decoration: none; /* Quita el subrayado */
+    z-index: 999;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
 }
+
+.boton-flotante::before {
+    content: '←';
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
 .boton-flotante:hover {
-    background-color: #388e3c;
-    text-decoration: none; /* Asegura que tampoco haya subrayado al pasar el mouse */
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+    text-decoration: none;
+    color: #fff;
+}
+
+.boton-flotante:hover::before {
+    transform: translateX(-5px);
+}
+
+.boton-flotante:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .boton-flotante {
+        bottom: 20px;
+        left: 20px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Asegurar que no haya subrayado en ningún estado */
+.boton-flotante:link,
+.boton-flotante:visited,
+.boton-flotante:hover,
+.boton-flotante:active {
+    text-decoration: none;
+    color: #fff;
 }
