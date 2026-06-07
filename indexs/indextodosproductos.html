@@ -3,260 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo completo de productos regionales Mia Jazmin. Quesos, mieles, vinos, aceitunas y más. Hacé tu pedido por WhatsApp.">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#25D366">
+    
+    <title>Catálogo Completo | Regionales Mia Jazmin</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../estilos/estilosproductos.css">
     <link rel="stylesheet" href="../estilos/estilosbotonvolver.css">
-    <title>Productos Regionales Mia Jazmin</title>
+    
+    <style>
+        /* Estilos adicionales para el carrito mejorado */
+        .cart-floating {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cart-floating:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        .cart-count {
+            background: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .qty-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            font-weight: 600;
+        }
+
+        .producto.selected {
+            border: 2px solid #25D366;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .selection-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #25D366;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: none;
+        }
+
+        .producto.selected .selection-badge {
+            display: block;
+        }
+
+        .producto {
+            position: relative;
+        }
+
+        /* Filtros */
+        .filters {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff7e5f;
+            color: white;
+            border-color: #ff7e5f;
+        }
+
+        .search-box {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 300px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Modal del carrito */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .btn-whatsapp-send {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+        }
+    </style>
 </head>
 <body>
-    
     <div class="header">
-        <h1>Productos Regionales Mia Jazmin</h1>
+        <h1>🛍️ Catálogo Mia Jazmin</h1>
+        <p>Seleccioná tus productos y envianos tu pedido por WhatsApp</p>
     </div>
 
-    <div class="productos">
-
-        <!-- quesos -->
-        <div class="producto" >
-            <img src="../Img/quesos/quesocriollo.jpg" alt="Queso artesanal">
-            <h2>Queso Artesanal</h2>
-            <p>Elaborado con leche fresca de nuestros ganaderos locales, 100% de cabra y vaca, de Ulapes, La Rioja</p>
-        </div>
-         <div class="producto">
-            <img src="../Img/quesos/quesocriollo2.jpg" alt="Queso criollo">
-            <h2>Queso Criollo</h2>
-            <p>De Ulapes, La Rioja</p>
-        </div>
-
-        <!-- mieles -->
-        <div class="producto">
-            <img src="../Img/miel/miel pura.jpg" alt="Miel pura">
-            <h2>Miel de Abeja Pura</h2>
-            <p>Cosechada en nuestros apiarios regionales, 100% pura de Olta</p>  
-        </div>
-        <div class="producto">
-            <img src="../Img/miel/mieldepalo de algarrobo1.jpg" alt="Miel del palo del algarrobo">
-            <h2>Miel de palo de algarrobo</h2>
-            <p>Elaboración 100% casera, con un sabor suave y aroma característico.</p>
-        </div>
-
-        <!-- acites -->
-        <div class="producto">
-            <img src="../Img/aceites/oliva extravirgen.jpg" alt="Aceite de oliva">
-            <h2>Aceite de Oliva Extra Virgen</h2>
-            <p>Primera prensada en frio de Villa Mazan. Variedad Arauco.</p> 
-        </div>
-
-        <!-- vino tinto y balncos -->
-        <div class="producto">
-            <img src="../Img/vinos/tintos/vinotintomichango.jpg" alt="Vino grapa artesanal mi chango">
-            <h2>Vino tinto Mi Chango</h2>
-            <p>Grapa Artesanal, de nuestros viñedos de Anjullón - La Rioja.</p>
-        </div>
-        <div class="producto">
-            <img src="../Img/vinos/tintos/vinotintomichangopatero.jpg" alt="Vino patero mi chango">
-            <h2>Vino tinto Mi Chango</h2>
-            <p>Vino Patero, de nuestros viñedos de Anjullón - La Rioja.</p>
-        </div>
-        <div class="producto">
-            <img src="../Img/vinos/tintos/vinotintomichangomistela.jpg" alt="Vino mistela mi chango">
-            <h2>Vino tinto Mi Chango</h2>
-            <p>Vino Mistela, de nuestros viñedos de Anjullón - La Rioja.</p>
-        </div>
-        <div class="producto">
-            <img src="../Img/vinos/tintos/vinotintoparrales.jpg" alt="Vino Parrales de la costa">
-            <h2>Vino tinto Parrales de la Costa</h2>
-            <p>Vino artesanal Malbec, de nuestros viñedos de Anjullón - La Rioja.</p>
-        </div>
-        
-        <!-- vinos Blancos -->
-        <div class="producto">
-            <img src="../Img/vinos/blancos/vinoblancomichango.jpg" alt="Vino blanco mi chango">
-            <h2>Vino blanco Mi Chango</h2>
-            <p>Vino Grapa Artesanal, de nuestros viñedos de Anjullón - La Rioja.</p>
-        </div>
- 
-        <!-- salames -->
-        <div class="producto">
-            <img src="../Img/salames/salamecolonial1.jpg" alt="salamecolonial">
-            <h2>Salame casero</h2>
-            <p>Salame 100% casero, tipo colonial con receta cordobesa.</p>
-        </div>
-
-        <!-- aceitunas -->
-        <div class="producto">
-            <img src="../Img/aceitunas/aceitunasconmorron.png" alt="aceitunas verdes rellenas con morron">
-            <h2>Aceitunas con morrón</h2>
-            <p>Aceitunas rellenas con morrón.</p> 
-        </div>
-        <div class="producto">
-            <img src="../Img/aceitunas/aceituna-gordal-rellena-de-queso.jpg" alt="aceitunas verdes rellenas con queso">
-            <h2>Aceitunas con queso</h2>
-            <p>Aceitunas rellenas con queso.</p> 
-        </div>
-        <div class="producto">
-            <img src="../Img/aceitunas/aceitunas rellenas saleme.png" alt="aceitunas verdes rellenas con salame">
-            <h2>Aceitunas con salame</h2>
-            <p>Aceitunas rellenas con salame.</p> 
-        </div>
-        <div class="producto">
-            <img src="../Img/aceitunas/aceituna-gordal-rellena-de-jamon.jpg" alt="aceitunas verdes rellenas con jamon">
-            <h2>Aceitunas con jamon</h2>
-            <p>Aceitunas rellenas con jamon.</p> 
-        </div>
-        <div class="producto">
-            <img src="../Img/aceitunas/aceitunasmixtas.jpeg" alt="aceitunas verdes rellenas mixtas">
-            <h2>Aceitunas mixtas</h2>
-            <p>Aceitunas con rellenos mixtos.</p> 
-        </div>
-
-        <!-- alfajores -->
-        <div class="producto">
-            <img src="../Img/alfajores/alfajores.png" alt="alfajores con dulce de leche artensales">
-            <h2>Alfajores</h2>
-            <p>Alfajores de dulce de leche artesanales</p>
-        </div>
-
-        <!-- patay -->
-        <div class="producto">
-            <img src="../Img/patay/patay1.jpg" alt="patay">
-            <h2>Patay</h2>
-            <p>Elaboracion 100% de algarrobo, de Aimogasta - La Rioja.</p>  
-        </div>
-
-        <!-- Arropes -->
-        <div class="producto">
-            <img src="../Img/arropes/arropes.png" alt="Arropes">
-            <h2>Arropes</h2>
-            <p>Elaboracion 100% casera, Arrope de algarroba, uva, chañar, tuna entre otras, produciodas en Aimogasta - La Rioja.</p>  
-        </div>
-         <!-- dulces y frutos en almibar -->
-        <div class="producto">
-            <img src="../Img/Dulces y Frutos en almibar/dulces y frutos en almibar.jpg" alt="dulces y frutos en almibar">
-            <h2>Dulces y Frutos en almibar</h2>
-            <p>Elaboracion 100% casera.</p>  
-        </div>
-
-        <!-- Nueces -->
-        <div class="producto">
-            <img src="../Img/Nueces/nueces convitadas1.jpg" alt="Nueces confitadas">
-            <h2>Nueces Confitadas</h2>
-            <p>Elaboradas con dulce de leche y fonda.</p>  
-        </div>
-
-        <!-- frutos secos -->
-        <div class="producto">
-            <img src="../Img/Frutos Secos/frutos secos variados1.jpg" alt="Mix Frutos Secos">
-            <h2>Mix Frutos Secos</h2>
-            <p>Frutos Secos 100% de la Rioja. Elaborado con nueces, almendras, pasas, mani, Etc.</p>
-        </div>
-        <div class="producto">
-            <img src="../Img/Frutos Secos/frutossecos pasas 1.jpg" alt="Pasas de Uva">
-            <h2>Pasas de uva</h2>
-            <p>Producto 100% de la Rioja.</p>
-        </div>  
-        <!-- picadas -->
-        <div class="producto">
-            <img src="../Img/picadas/Historia de Instagram Saludo Cumpleaños Amiga Collage Blanco2222.png" alt="Pasas de Uva">
-            <h2>Variedad en Picadas</h2>
-            <p>Disfruta de una exquisita selección de embutidos. Una opción irresistible para quienes buscan calidad y variedad en cada detalle.</p>
-        </div>  
-
-
-
-
-
-
+    <!-- Filtros de búsqueda -->
+    <div class="filters">
+        <input type="text" class="search-box" id="searchInput" placeholder="🔍 Buscar productos...">
+        <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+        <button class="filter-btn" onclick="filterProducts('quesos')">🧀 Quesos</button>
+        <button class="filter-btn" onclick="filterProducts('mieles')">🍯 Mieles</button>
+        <button class="filter-btn" onclick="filterProducts('vinos')">🍷 Vinos</button>
+        <button class="filter-btn" onclick="filterProducts('otros')">🫒 Otros</button>
     </div>
-    <a href="../indexs/indexprincipal.html" class="boton-flotante" title="Volver a inicio">Volver</a>
+
+    <div class="productos" id="productosContainer">
+        <!-- Los productos se cargarán dinámicamente -->
+    </div>
+
+    <!-- Botón flotante del carrito -->
+    <button class="cart-floating" onclick="toggleCart()">
+        🛒 Ver Pedido
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Modal del carrito -->
+    <div class="cart-modal" id="cartModal" onclick="closeCartOnBackground(event)">
+        <div class="cart-content" onclick="event.stopPropagation()">
+            <div class="cart-header">
+                <h2>🛒 Tu Pedido</h2>
+                <button class="close-modal" onclick="toggleCart()">✕</button>
+            </div>
+            <div id="cartItems">
+                <div class="empty-cart">No hay productos seleccionados</div>
+            </div>
+            <button class="btn-whatsapp-send" onclick="sendOrder()">
+                📱 Enviar pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <a href="indexprincipal.html" class="boton-flotante" title="Volver al inicio">Volver al Inicio</a>
+
+    <footer>
+        <p>📧 juanreta390@gmail.com | 📱 +54 9 380 479-3100</p>
+        <p>🚚 Envíos a todo el país | 📍 La Rioja, Argentina</p>
+        <p style="margin-top: 15px; font-size: 0.9rem; font-weight: 700;">
+            Desarrollado por <a href="https://wa.me/5492645162313" target="_blank" rel="noopener" class="fusiontech-link" title="Soporte FusionTech">FusionTech</a>
+        </p>
+    </footer>
 
     <script>
-    // Crear un array para almacenar los productos seleccionados
-    let carrito = [];
+        // Base de datos de productos (segura, en cliente)
+        const productsDB = [
+            { id: 1, name: "Queso Artesanal", category: "quesos", img: "../Img/quesos/quesocriollo.jpg", desc: "Elaborado con leche fresca, 100% cabra y vaca, de Ulapes, La Rioja", price: "Consultar" },
+            { id: 2, name: "Queso Criollo", category: "quesos", img: "../Img/quesos/quesocriollo2.jpg", desc: "De Ulapes, La Rioja", price: "Consultar" },
+            { id: 3, name: "Miel de Abeja Pura", category: "mieles", img: "../Img/miel/miel pura.jpg", desc: "Cosechada en apiarios regionales, 100% pura de Olta", price: "Consultar" },
+            { id: 4, name: "Miel de Palo de Algarrobo", category: "mieles", img: "../Img/miel/mieldepalo de algarrobo1.jpg", desc: "Elaboración 100% casera, sabor suave y aroma característico", price: "Consultar" },
+            { id: 5, name: "Aceite de Oliva Extra Virgen", category: "otros", img: "../Img/aceites/oliva extravirgen.jpg", desc: "Primera prensada en frío de Villa Mazan. Variedad Arauco", price: "Consultar" },
+            { id: 6, name: "Vino Tinto Mi Chango (Grapa)", category: "vinos", img: "../Img/vinos/tintos/vinotintomichango.jpg", desc: "Grapa Artesanal, viñedos de Anjullón - La Rioja", price: "Consultar" },
+            { id: 7, name: "Vino Tinto Mi Chango (Patero)", category: "vinos", img: "../Img/vinos/tintos/vinotintomichangopatero.jpg", desc: "Vino Patero, viñedos de Anjullón - La Rioja", price: "Consultar" },
+            { id: 8, name: "Vino Tinto Mi Chango (Mistela)", category: "vinos", img: "../Img/vinos/tintos/vinotintomichangomistela.jpg", desc: "Vino Mistela, viñedos de Anjullón - La Rioja", price: "Consultar" },
+            { id: 9, name: "Vino Tinto Parrales de la Costa", category: "vinos", img: "../Img/vinos/tintos/vinotintoparrales.jpg", desc: "Vino artesanal Malbec, viñedos de Anjullón - La Rioja", price: "Consultar" },
+            { id: 10, name: "Vino Blanco Mi Chango", category: "vinos", img: "../Img/vinos/blancos/vinoblancomichango.jpg", desc: "Vino Grapa Artesanal, viñedos de Anjullón - La Rioja", price: "Consultar" },
+            { id: 11, name: "Salame Casero", category: "otros", img: "../Img/salames/salamecolonial1.jpg", desc: "100% casero, tipo colonial con receta cordobesa", price: "Consultar" },
+            { id: 12, name: "Aceitunas con Morrón", category: "otros", img: "../Img/aceitunas/aceitunasconmorron.png", desc: "Aceitunas rellenas con morrón", price: "Consultar" },
+            { id: 13, name: "Aceitunas con Queso", category: "otros", img: "../Img/aceitunas/aceituna-gordal-rellena-de-queso.jpg", desc: "Aceitunas rellenas con queso", price: "Consultar" },
+            { id: 14, name: "Aceitunas con Salame", category: "otros", img: "../Img/aceitunas/aceitunas rellenas saleme.png", desc: "Aceitunas rellenas con salame", price: "Consultar" },
+            { id: 15, name: "Aceitunas con Jamón", category: "otros", img: "../Img/aceitunas/aceituna-gordal-rellena-de-jamon.jpg", desc: "Aceitunas rellenas con jamón", price: "Consultar" },
+            { id: 16, name: "Aceitunas Mixtas", category: "otros", img: "../Img/aceitunas/aceitunasmixtas.jpeg", desc: "Aceitunas con rellenos mixtos", price: "Consultar" },
+            { id: 17, name: "Alfajores Artesanales", category: "otros", img: "../Img/alfajores/alfajores.png", desc: "De dulce de leche artesanales", price: "Consultar" },
+            { id: 18, name: "Patay", category: "otros", img: "../Img/patay/patay1.jpg", desc: "Elaboración 100% de algarrobo, de Aimogasta - La Rioja", price: "Consultar" },
+            { id: 19, name: "Arropes", category: "otros", img: "../Img/arropes/arropes.png", desc: "Caseros: algarroba, uva, chañar, tuna. Aimogasta - La Rioja", price: "Consultar" },
+            { id: 20, name: "Dulces y Frutos en Almibar", category: "otros", img: "../Img/Dulces y Frutos en almibar/dulces y frutos en almibar.jpg", desc: "Elaboración 100% casera", price: "Consultar" },
+            { id: 21, name: "Nueces Confitadas", category: "otros", img: "../Img/Nueces/nueces convitadas1.jpg", desc: "Elaboradas con dulce de leche y fondant", price: "Consultar" },
+            { id: 22, name: "Mix Frutos Secos", category: "otros", img: "../Img/Frutos Secos/frutos secos variados1.jpg", desc: "100% de La Rioja: nueces, almendras, pasas, maní", price: "Consultar" },
+            { id: 23, name: "Pasas de Uva", category: "otros", img: "../Img/Frutos Secos/frutossecos pasas 1.jpg", desc: "Producto 100% de La Rioja", price: "Consultar" },
+            { id: 24, name: "Variedad en Picadas", category: "otros", img: "../Img/picadas/Historia de Instagram Saludo Cumpleaños Amiga Collage Blanco2222.png", desc: "Selección de embutidos, calidad y variedad", price: "Consultar" }
+        ];
 
-    // Permitir seleccionar productos haciendo clic en la imagen
-    document.querySelectorAll('.producto').forEach((producto, idx) => {
-        // Crear checkbox oculto
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = 'producto-' + idx;
-        checkbox.style.display = 'none';
+        let carrito = [];
+        let currentFilter = 'all';
 
-        // Insertar checkbox al principio del div producto
-        producto.insertBefore(checkbox, producto.firstChild);
+        // Renderizar productos
+        function renderProducts(filter = 'all', search = '') {
+            const container = document.getElementById('productosContainer');
+            container.innerHTML = '';
+            
+            let filtered = productsDB;
+            
+            if (filter !== 'all') {
+                filtered = filtered.filter(p => p.category === filter);
+            }
+            
+            if (search) {
+                filtered = filtered.filter(p => 
+                    p.name.toLowerCase().includes(search.toLowerCase()) ||
+                    p.desc.toLowerCase().includes(search.toLowerCase())
+                );
+            }
 
-        // Añadir clase para resaltar selección
-        producto.style.cursor = 'pointer';
+            filtered.forEach(product => {
+                const inCart = carrito.find(item => item.id === product.id);
+                const qty = inCart ? inCart.qty : 0;
+                
+                const div = document.createElement('div');
+                div.className = `producto ${qty > 0 ? 'selected' : ''}`;
+                div.dataset.category = product.category;
+                div.innerHTML = `
+                    <span class="selection-badge">✓ En pedido</span>
+                    <img src="${product.img}" alt="${product.name}" loading="lazy">
+                    <h2>${product.name}</h2>
+                    <p>${product.desc}</p>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="updateQty(${product.id}, -1)">−</button>
+                        <input type="number" class="qty-input" id="qty-${product.id}" value="${qty}" min="0" readonly>
+                        <button class="qty-btn" onclick="updateQty(${product.id}, 1)">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
 
-        // Manejar selección al hacer clic en la imagen
-        const img = producto.querySelector('img');
-        img.style.outline = '2px solid transparent';
-        img.style.transition = 'outline 0.2s';
+        // Actualizar cantidad
+        function updateQty(id, change) {
+            const product = productsDB.find(p => p.id === id);
+            const existing = carrito.find(item => item.id === id);
+            
+            if (existing) {
+                existing.qty += change;
+                if (existing.qty <= 0) {
+                    carrito = carrito.filter(item => item.id !== id);
+                }
+            } else if (change > 0) {
+                carrito.push({ ...product, qty: 1 });
+            }
+            
+            // Actualizar visualmente la tarjeta del producto
+            const qtyInput = document.getElementById(`qty-${id}`);
+            if (qtyInput) {
+                const newQty = Math.max(0, (existing?.qty || 0));
+                qtyInput.value = newQty;
+                // Agregar o quitar clase de selección
+                const card = qtyInput.closest('.producto');
+                if (card) card.classList.toggle('selected', newQty > 0);
+            }
+            
+            updateCartUI();
+        }
 
-        function updateSelection() {
-            const nombre = producto.querySelector('h2').textContent.trim();
-            if (checkbox.checked) {
-                img.style.outline = '2px solid #ff0000';
-                if (!carrito.includes(nombre)) carrito.push(nombre);
+        // Actualizar UI del carrito
+        function updateCartUI() {
+            const count = carrito.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').textContent = count;
+            
+            const cartItems = document.getElementById('cartItems');
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">No hay productos seleccionados<br><small>Tocá + en los productos para agregarlos</small></div>';
             } else {
-                img.style.outline = '2px solid transparent';
-                carrito = carrito.filter(item => item !== nombre);
+                cartItems.innerHTML = carrito.map(item => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong>
+                            <br><small>${item.qty} unidad${item.qty > 1 ? 'es' : ''}</small>
+                        </div>
+                        <button onclick="updateQty(${item.id}, -${item.qty}); toggleCart(); toggleCart();" style="background:#ff4757;color:white;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;">✕</button>
+                    </div>
+                `).join('');
             }
         }
 
-        img.addEventListener('click', function() {
-            checkbox.checked = !checkbox.checked;
-            updateSelection();
+        // Toggle modal
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+            updateCartUI();
+        }
+
+        function closeCartOnBackground(e) {
+            if (e.target.id === 'cartModal') toggleCart();
+        }
+
+        // Filtrar productos
+        function filterProducts(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent.includes('Todos'))) {
+                    btn.classList.add('active');
+                }
+            });
+            renderProducts(category, document.getElementById('searchInput').value);
+        }
+
+        // Búsqueda en tiempo real
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderProducts(currentFilter, e.target.value);
         });
 
-        // Por accesibilidad, permitir seleccionar con el checkbox también
-        checkbox.addEventListener('change', updateSelection);
-    });
+        // Enviar pedido por WhatsApp
+        function sendOrder() {
+            if (carrito.length === 0) {
+                alert('Seleccioná al menos un producto');
+                return;
+            }
 
-    // Crear botón para enviar por WhatsApp
-    const botonEnviar = document.createElement('button');
-    botonEnviar.textContent = 'Enviar lista por WhatsApp';
-    botonEnviar.style.position = 'fixed';
-    botonEnviar.style.bottom = '80px';
-    botonEnviar.style.right = '30px';
-    botonEnviar.style.padding = '12px 20px';
-    botonEnviar.style.background = '#25D366';
-    botonEnviar.style.color = '#fff';
-    botonEnviar.style.border = 'none';
-    botonEnviar.style.borderRadius = '25px';
-    botonEnviar.style.cursor = 'pointer';
-    botonEnviar.style.zIndex = '1000';
+            let mensaje = '¡Hola! Quiero hacer un pedido de Regionales Mia Jazmin:\n\n';
+            carrito.forEach(item => {
+                mensaje += `• ${item.name} - Cantidad: ${item.qty}\n`;
+            });
+            mensaje += '\n¿Me pasás los precios y formas de pago? Gracias!';
 
-    // Cambiar color al pasar el mouse por encima
-    botonEnviar.addEventListener('mouseenter', function() {
-        botonEnviar.style.background = '#388e3c';
-    });
-    botonEnviar.addEventListener('mouseleave', function() {
-        botonEnviar.style.background = '#25D366';
-    });
-        
-
-    botonEnviar.onclick = function() {
-        if (carrito.length === 0) {
-            alert('Selecciona al menos un producto por favor.');
-            return;
+            const telefono = '5493804793100';
+            const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+            
+            // Validación de seguridad
+            if (telefono.match(/^\d{11,13}$/)) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+                console.error('Número de teléfono inválido');
+            }
         }
-        const mensaje = encodeURIComponent(
-            'Hola! Quiero encargar los siguientes productos:\n- ' + carrito.map(nombre => `${nombre} , Cantidad: `).join('\n- ')
-        );
-        // Cambia el número por el del dueño (formato internacional, sin + ni 0 inicial)
-        const telefono = '5493804793100';
-        window.open(`https://wa.me/${telefono}?text=${mensaje}`, '_blank');
-    };
 
-    document.body.appendChild(botonEnviar);
+        // Inicializar
+        renderProducts();
+
+        // Prevenir envío accidental con Enter en búsqueda
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') e.preventDefault();
+        });
     </script>
-
-
-
-
-    <footer>
-        <p>Correo Electronico: juanreta390@gmail.com | Tel: 3804793100</p>
-        <p>Contactanos a nuestro correo o Whatsapp para encargos o consultas.</p>
-    </footer>
 </body>
 </html>

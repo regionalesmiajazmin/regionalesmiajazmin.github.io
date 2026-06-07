@@ -2,7 +2,7 @@
     position: fixed;
     bottom: 30px;
     left: 30px;
-    padding: 15px 25px;
+    padding: 12px 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #fff;
     border: none;
@@ -12,7 +12,7 @@
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
     transition: all 0.3s ease;
     display: flex;
